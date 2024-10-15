@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend-Backend Communication Test</title>
+</head>
+<body>
+    <h1>Frontend-Backend Communication Test</h1>
+    <button id="testBtn">Test Backend Communication</button>
+    <p id="result"></p>
+
+    <script>
+        const testBtn = document.getElementById('testBtn');
+        const result = document.getElementById('result');
+
+        // Replace 'YOUR_BACKEND_URL' with your actual backend URL after deployment
+        const backendUrl = 'https://backendtest-ij68.onrender.com';
+
+        testBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch(`${backendUrl}/api/hello`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                result.textContent = `Server response: ${data.message}`;
+            } catch (error) {
+                result.textContent = `Error: ${error.message}`;
+            }
+        });
+    </script>
+</body>
+</html>
